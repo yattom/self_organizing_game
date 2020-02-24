@@ -1,5 +1,5 @@
 var config = {
-  people_count: 10,
+  people_count: 80,
   distance_margin: 5,
 };
 var model = {};
@@ -66,7 +66,16 @@ function draw() {
   }
 }
 
+
 function cal_dir(p, t1, t2) {
+  // 線分t1-t2の中点で直行する直線にpから垂線を下ろし、その垂線に沿って距離1移動する
+  // a = t2.x - t1.x
+  // b = t2.y - t1.y
+  // cx = (t1.x + t2.x) / 2
+  // cy = (t1.y + t2.y) / 2
+  // n = a(x - cx) + b(y - cy)
+  // dx = -na
+  // dy = -nb
   var n = (t2.x - t1.x) * (p.x - (t1.x + t2.x) / 2) + (t2.y - t1.y) * (p.y - (t1.y + t2.y) / 2);
 
   var dx = -n * (t2.x - t1.x);
