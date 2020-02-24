@@ -67,36 +67,14 @@ function draw() {
 }
 
 function cal_dir(p, t1, t2) {
-  var n = (t2.y - t1.y) * (p.x - (t1.x + t2.x) / 2) + (t1.x - t2.x) * (p.y - (t1.y + t2.y) / 2);
+  var n = (t2.x - t1.x) * (p.x - (t1.x + t2.x) / 2) + (t2.y - t1.y) * (p.y - (t1.y + t2.y) / 2);
 
-  var dx = -n * (t1.x - t2.x);
-  var dy = -n * (t1.y - t2.y);
+  var dx = -n * (t2.x - t1.x);
+  var dy = -n * (t2.y - t1.y);
   var d = Math.sqrt(dx ** 2 + dy ** 2);
   return [dx / d, dy / d];
 }
 
-function cal_dir(p, t1, t2) {
-  var d1 = Math.sqrt((p.x - t1.x) ** 2 + (p.y - t1.y) ** 2);
-  var d2 = Math.sqrt((p.x - t2.x) ** 2 + (p.y - t2.y) ** 2);
-  var d_org = Math.abs(d1 - d2);
-  var d_min = 0;
-  var dx_min = 0;
-  var dy_min = 0;
-  var dirs = [[-1, 0], [0, -1], [0, 1], [1, 0]];
-  for(var dir in dirs) {
-    var dx = dirs[dir][0];
-    var dy = dirs[dir][1];
-    var d1 = Math.sqrt((p.x + dx - t1.x) ** 2 + (p.y + dy - t1.y) ** 2);
-    var d2 = Math.sqrt((p.x + dx - t2.x) ** 2 + (p.y + dy - t2.y) ** 2);
-    var d = Math.abs(d1 - d2) - d_org;
-    if(d < d_min) {
-      d_min = d;
-      dx_min = dx;
-      dy_min = dy;
-    }
-  }
-  return [dx_min, dy_min];
-}
 function update() {
   for(var i in model.people) {
     var p = model.people[i];
